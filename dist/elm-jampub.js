@@ -8145,19 +8145,12 @@ var _elm_lang$html$Html_Attributes$classList = function (list) {
 };
 var _elm_lang$html$Html_Attributes$style = _elm_lang$virtual_dom$VirtualDom$style;
 
-var _user$project$Classnamer$className = function (name) {
-	return A2(
-		_elm_lang$html$Html_Attributes$property,
-		'className',
-		_elm_lang$core$Json_Encode$string(name));
-};
-
 var _user$project$Jampub$headerView = function (model) {
 	return A2(
 		_elm_lang$html$Html$header,
 		{
 			ctor: '::',
-			_0: _user$project$Classnamer$className('header'),
+			_0: _elm_lang$html$Html_Attributes$class('header'),
 			_1: {ctor: '[]'}
 		},
 		{
@@ -8208,7 +8201,7 @@ var _user$project$Jampub$homeView = function (model) {
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _user$project$Classnamer$className('home'),
+			_0: _elm_lang$html$Html_Attributes$class('home'),
 			_1: {ctor: '[]'}
 		},
 		{
@@ -8231,7 +8224,18 @@ var _user$project$Jampub$homeView = function (model) {
 						_0: _elm_lang$html$Html$text('Second article'),
 						_1: {ctor: '[]'}
 					}),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$article,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Third article'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
 			}
 		});
 };

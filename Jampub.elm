@@ -1,6 +1,5 @@
 module Jampub exposing (main)
 
-import Classnamer exposing (className)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
@@ -52,15 +51,16 @@ view model =
 
 homeView : Model -> Html Msg
 homeView model =
-    div [ className "home" ]
+    div [ class "home" ]
         [ article [] [ text "First article" ]
         , article [] [ text "Second article" ]
+        , article [] [ text "Third article" ]
         ]
 
 
 headerView : Model -> Html Msg
 headerView model =
-    header [ className "header" ]
+    header [ class "header" ]
         [ text "Welcome"
         , nav []
             [ a [ href "http://codewithflair.org" ] [ text "Blog" ]
