@@ -1,69 +1,73 @@
 module Jampub exposing (main)
 
-import Html exposing (..)
-import Html.Attributes exposing (..)
+import Color
+import Element exposing (..)
+import Element.Attributes exposing (..)
+import Html exposing (Html)
+import Style exposing (..)
+import Style.Color as Color
+import Style.Font as Font
 
 
-main : Program Never Model Msg
+main : Program Never number (number -> number)
 main =
     Html.beginnerProgram
-        { model = model
-        , update = update
+        { model = 0
+        , update = \x -> x
         , view = view
         }
-
-
-
--- MODEL
-
-
-type alias Model =
-    { greetings : String }
-
-
-model : Model
-model =
-    { greetings = "Well, that's a start." }
-
-
-
--- UPDATE
-
-
-type alias Msg =
-    String
-
-
-update : Msg -> Model -> Model
-update msg model =
-    { model | greetings = msg }
 
 
 
 -- VIEW
 
 
-view : Model -> Html Msg
-view model =
-    div []
-        [ headerView model, homeView model ]
+type Styles
+    = None
+    | NavBar
+    | Home
 
 
-homeView : Model -> Html Msg
-homeView model =
-    div [ class "home" ]
-        [ article [] [ text "First article" ]
-        , article [] [ text "Second article" ]
-        , article [] [ text "Third article" ]
+stylesheet : StyleSheet Styles variation
+stylesheet =
+    Style.stylesheet
+        [ style None []
+        , style NavBar
+            [ Color.background Color.lightGrey
+            , Font.typeface [ "DejaVu", "Arial" ]
+            , Font.size 16
+            ]
+        , style Home []
         ]
 
 
-headerView : Model -> Html Msg
-headerView model =
-    header [ class "header" ]
+view : a -> Html msg
+view _ =
+    Element.layout stylesheet <|
+        column None
+            []
+            [ headerView, homeView ]
+
+
+homeView : Element Styles variation msg
+homeView =
+    column Home
+        []
+        [ article <| el None [] (text "First article")
+        , el None [] (text "Second article")
+        , el None [] (text "Third article")
+        , el None [] (text "Fourth article")
+        ]
+
+
+headerView : Element Styles variation msg
+headerView =
+    row NavBar
+        [ justify, paddingXY 20 20 ]
         [ text "Welcome"
-        , nav []
-            [ a [ href "http://codewithflair.org" ] [ text "Blog" ]
-            , a [ href "http://codewithflair.org" ] [ text "Blog" ]
+        , row None
+            [ spacing 20 ]
+            [ el None [ alignBottom ] (link "http://codewithflair.org" <| text "Blog")
+            , el None [ alignBottom ] (link "http://codewithflair.org" <| text "Blog")
             ]
         ]
