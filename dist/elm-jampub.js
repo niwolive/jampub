@@ -18711,6 +18711,99 @@ var _mdgriffith$style_elements$Element$Option = F3(
 	});
 var _mdgriffith$style_elements$Element$option = _mdgriffith$style_elements$Element$Option;
 
+var _mdgriffith$style_elements$Style_Border$roundBottomLeft = function (x) {
+	return A2(
+		_mdgriffith$style_elements$Style_Internal_Model$Exact,
+		'border-bottom-left-radius',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(x),
+			'px'));
+};
+var _mdgriffith$style_elements$Style_Border$roundBottomRight = function (x) {
+	return A2(
+		_mdgriffith$style_elements$Style_Internal_Model$Exact,
+		'border-bottom-right-radius',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(x),
+			'px'));
+};
+var _mdgriffith$style_elements$Style_Border$roundTopRight = function (x) {
+	return A2(
+		_mdgriffith$style_elements$Style_Internal_Model$Exact,
+		'border-top-right-radius',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(x),
+			'px'));
+};
+var _mdgriffith$style_elements$Style_Border$roundTopLeft = function (x) {
+	return A2(
+		_mdgriffith$style_elements$Style_Internal_Model$Exact,
+		'border-top-left-radius',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(x),
+			'px'));
+};
+var _mdgriffith$style_elements$Style_Border$rounded = function (box) {
+	return A2(
+		_mdgriffith$style_elements$Style_Internal_Model$Exact,
+		'border-radius',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(box),
+			'px'));
+};
+var _mdgriffith$style_elements$Style_Border$dotted = A2(_mdgriffith$style_elements$Style_Internal_Model$Exact, 'border-style', 'dotted');
+var _mdgriffith$style_elements$Style_Border$dashed = A2(_mdgriffith$style_elements$Style_Internal_Model$Exact, 'border-style', 'dashed');
+var _mdgriffith$style_elements$Style_Border$solid = A2(_mdgriffith$style_elements$Style_Internal_Model$Exact, 'border-style', 'solid');
+var _mdgriffith$style_elements$Style_Border$none = A2(_mdgriffith$style_elements$Style_Internal_Model$Exact, 'border-width', '0');
+var _mdgriffith$style_elements$Style_Border$bottom = function (l) {
+	return A2(
+		_mdgriffith$style_elements$Style_Internal_Model$Exact,
+		'border-bottom-width',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(l),
+			'px'));
+};
+var _mdgriffith$style_elements$Style_Border$top = function (l) {
+	return A2(
+		_mdgriffith$style_elements$Style_Internal_Model$Exact,
+		'border-top-width',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(l),
+			'px'));
+};
+var _mdgriffith$style_elements$Style_Border$right = function (l) {
+	return A2(
+		_mdgriffith$style_elements$Style_Internal_Model$Exact,
+		'border-right-width',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(l),
+			'px'));
+};
+var _mdgriffith$style_elements$Style_Border$left = function (l) {
+	return A2(
+		_mdgriffith$style_elements$Style_Internal_Model$Exact,
+		'border-left-width',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(l),
+			'px'));
+};
+var _mdgriffith$style_elements$Style_Border$all = function (v) {
+	return A2(
+		_mdgriffith$style_elements$Style_Internal_Model$Exact,
+		'border-width',
+		_mdgriffith$style_elements$Style_Internal_Render_Value$box(
+			{ctor: '_Tuple4', _0: v, _1: v, _2: v, _3: v}));
+};
+
 var _mdgriffith$style_elements$Style_Color$placeholder = function (clr) {
 	return A2(
 		_mdgriffith$style_elements$Style_Internal_Model$PseudoElement,
@@ -18818,8 +18911,12 @@ var _mdgriffith$style_elements$Style_Font$typeface = function (families) {
 		_mdgriffith$style_elements$Style_Internal_Render_Value$typeface(families));
 };
 
-var _user$project$Jampub$Home = {ctor: 'Home'};
+var _user$project$Jampub$Splash = {ctor: 'Splash'};
+var _user$project$Jampub$Post = {ctor: 'Post'};
 var _user$project$Jampub$NavBar = {ctor: 'NavBar'};
+var _user$project$Jampub$Main = {ctor: 'Main'};
+var _user$project$Jampub$Home = {ctor: 'Home'};
+var _user$project$Jampub$CatchLine = {ctor: 'CatchLine'};
 var _user$project$Jampub$None = {ctor: 'None'};
 var _user$project$Jampub$stylesheet = _mdgriffith$style_elements$Style$stylesheet(
 	{
@@ -18838,6 +18935,17 @@ var _user$project$Jampub$stylesheet = _mdgriffith$style_elements$Style$styleshee
 					_0: _mdgriffith$style_elements$Style_Color$background(_elm_lang$core$Color$lightGrey),
 					_1: {
 						ctor: '::',
+						_0: _mdgriffith$style_elements$Style_Font$size(16),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_mdgriffith$style_elements$Style$style,
+					_user$project$Jampub$Main,
+					{
+						ctor: '::',
 						_0: _mdgriffith$style_elements$Style_Font$typeface(
 							{
 								ctor: '::',
@@ -18848,59 +18956,112 @@ var _user$project$Jampub$stylesheet = _mdgriffith$style_elements$Style$styleshee
 									_1: {ctor: '[]'}
 								}
 							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_mdgriffith$style_elements$Style$style,
+						_user$project$Jampub$Splash,
+						{
+							ctor: '::',
+							_0: _mdgriffith$style_elements$Style_Color$background(_elm_lang$core$Color$lightPurple),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_mdgriffith$style_elements$Style$style,
+							_user$project$Jampub$Post,
+							{
+								ctor: '::',
+								_0: _mdgriffith$style_elements$Style_Border$all(1),
+								_1: {
+									ctor: '::',
+									_0: _mdgriffith$style_elements$Style_Color$border(_elm_lang$core$Color$lightGrey),
+									_1: {ctor: '[]'}
+								}
+							}),
 						_1: {
 							ctor: '::',
-							_0: _mdgriffith$style_elements$Style_Font$size(16),
+							_0: A2(
+								_mdgriffith$style_elements$Style$style,
+								_user$project$Jampub$CatchLine,
+								{
+									ctor: '::',
+									_0: _mdgriffith$style_elements$Style_Font$size(42),
+									_1: {ctor: '[]'}
+								}),
 							_1: {ctor: '[]'}
 						}
 					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_mdgriffith$style_elements$Style$style,
-					_user$project$Jampub$Home,
-					{ctor: '[]'}),
-				_1: {ctor: '[]'}
+				}
 			}
 		}
 	});
 var _user$project$Jampub$homeView = A3(
 	_mdgriffith$style_elements$Element$column,
 	_user$project$Jampub$Home,
-	{ctor: '[]'},
 	{
 		ctor: '::',
-		_0: _mdgriffith$style_elements$Element$article(
-			A3(
-				_mdgriffith$style_elements$Element$el,
-				_user$project$Jampub$None,
-				{ctor: '[]'},
-				_mdgriffith$style_elements$Element$text('First article'))),
-		_1: {
-			ctor: '::',
-			_0: A3(
-				_mdgriffith$style_elements$Element$el,
-				_user$project$Jampub$None,
-				{ctor: '[]'},
-				_mdgriffith$style_elements$Element$text('Second article')),
-			_1: {
+		_0: _mdgriffith$style_elements$Element_Attributes$spacing(40),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A3(
+			_mdgriffith$style_elements$Element$column,
+			_user$project$Jampub$Splash,
+			{
+				ctor: '::',
+				_0: _mdgriffith$style_elements$Element_Attributes$height(
+					_mdgriffith$style_elements$Element_Attributes$px(400)),
+				_1: {
+					ctor: '::',
+					_0: _mdgriffith$style_elements$Element_Attributes$width(
+						_mdgriffith$style_elements$Element_Attributes$percent(100)),
+					_1: {
+						ctor: '::',
+						_0: _mdgriffith$style_elements$Element_Attributes$center,
+						_1: {
+							ctor: '::',
+							_0: _mdgriffith$style_elements$Element_Attributes$verticalCenter,
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			},
+			{
 				ctor: '::',
 				_0: A3(
 					_mdgriffith$style_elements$Element$el,
-					_user$project$Jampub$None,
+					_user$project$Jampub$CatchLine,
 					{ctor: '[]'},
-					_mdgriffith$style_elements$Element$text('Third article')),
+					_mdgriffith$style_elements$Element$text('Lorem ipsum...')),
 				_1: {
 					ctor: '::',
 					_0: A3(
 						_mdgriffith$style_elements$Element$el,
 						_user$project$Jampub$None,
 						{ctor: '[]'},
-						_mdgriffith$style_elements$Element$text('Fourth article')),
+						_mdgriffith$style_elements$Element$text('Dolor. Sit. Amet.')),
 					_1: {ctor: '[]'}
 				}
-			}
+			}),
+		_1: {
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element$article(
+				A3(
+					_mdgriffith$style_elements$Element$el,
+					_user$project$Jampub$Post,
+					{
+						ctor: '::',
+						_0: _mdgriffith$style_elements$Element_Attributes$width(
+							_mdgriffith$style_elements$Element_Attributes$percent(100)),
+						_1: {ctor: '[]'}
+					},
+					_mdgriffith$style_elements$Element$text('First article'))),
+			_1: {ctor: '[]'}
 		}
 	});
 var _user$project$Jampub$headerView = A3(
@@ -18968,7 +19129,7 @@ var _user$project$Jampub$view = function (_p0) {
 		_user$project$Jampub$stylesheet,
 		A3(
 			_mdgriffith$style_elements$Element$column,
-			_user$project$Jampub$None,
+			_user$project$Jampub$Main,
 			{ctor: '[]'},
 			{
 				ctor: '::',

@@ -5,6 +5,7 @@ import Element exposing (..)
 import Element.Attributes exposing (..)
 import Html exposing (Html)
 import Style exposing (..)
+import Style.Border as Border
 import Style.Color as Color
 import Style.Font as Font
 
@@ -24,8 +25,12 @@ main =
 
 type Styles
     = None
-    | NavBar
+    | CatchLine
     | Home
+    | Main
+    | NavBar
+    | Post
+    | Splash
 
 
 stylesheet : StyleSheet Styles variation
@@ -34,17 +39,28 @@ stylesheet =
         [ style None []
         , style NavBar
             [ Color.background Color.lightGrey
-            , Font.typeface [ "DejaVu", "Arial" ]
             , Font.size 16
             ]
-        , style Home []
+        , style Main
+            [ Font.typeface [ "DejaVu", "Arial" ]
+            ]
+        , style Splash
+            [ Color.background Color.lightPurple
+            ]
+        , style Post
+            [ Border.all 1
+            , Color.border Color.lightGrey
+            ]
+        , style CatchLine
+            [ Font.size 42
+            ]
         ]
 
 
 view : a -> Html msg
 view _ =
     Element.layout stylesheet <|
-        column None
+        column Main
             []
             [ headerView, homeView ]
 
@@ -52,11 +68,13 @@ view _ =
 homeView : Element Styles variation msg
 homeView =
     column Home
-        []
-        [ article <| el None [] (text "First article")
-        , el None [] (text "Second article")
-        , el None [] (text "Third article")
-        , el None [] (text "Fourth article")
+        [ spacing 40 ]
+        [ column Splash
+            [ height (px 400), width (percent 100), center, verticalCenter ]
+            [ el CatchLine [] (text "Lorem ipsum...")
+            , el None [] (text "Dolor. Sit. Amet.")
+            ]
+        , article <| el Post [ width (percent 100) ] (text "First article")
         ]
 
 
