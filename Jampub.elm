@@ -8,15 +8,60 @@ import Style exposing (..)
 import Style.Border as Border
 import Style.Color as Color
 import Style.Font as Font
+import Task exposing (..)
+import Window
 
 
-main : Program Never number (number -> number)
+main : Program Never Model Msg
 main =
-    Html.beginnerProgram
-        { model = 0
-        , update = \x -> x
+    Html.program
+        { init = init
+        , update = update
         , view = view
+        , subscriptions = subscriptions
         }
+
+
+
+-- MODEL
+
+
+type alias Model =
+    { device : Device
+    }
+
+
+init : ( Model, Cmd Msg )
+init =
+    ( { device = Element.classifyDevice (Window.Size 0 0) }
+    , Task.perform Resize Window.size
+    )
+
+
+
+-- UPDATE
+
+
+type Msg
+    = Resize Window.Size
+
+
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    case msg of
+        Resize newSize ->
+            ( { model | device = Element.classifyDevice newSize }
+            , Cmd.none
+            )
+
+
+
+-- SUBSCRIPTIONS
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Window.resizes Resize
 
 
 
@@ -57,18 +102,18 @@ stylesheet =
         ]
 
 
-view : a -> Html msg
-view _ =
+view : Model -> Html msg
+view model =
     Element.layout stylesheet <|
         column Main
             []
-            [ headerView, homeView ]
+            [ headerView model.device, homeView model.device.width ]
 
 
-homeView : Element Styles variation msg
-homeView =
+homeView : Int -> Element Styles variation msg
+homeView viewportWidth =
     column Home
-        [ spacing 40 ]
+        [ spacing 40, paddingXY ((toFloat viewportWidth - 1024) / 2) 20 ]
         [ column Splash
             [ height (px 400), width (percent 100), center, verticalCenter ]
             [ el CatchLine [] (text "Lorem ipsum...")
@@ -78,10 +123,14 @@ homeView =
         ]
 
 
-headerView : Element Styles variation msg
-headerView =
+headerView : Device -> Element Styles variation msg
+headerView device =
     row NavBar
-        [ justify, paddingXY 20 20 ]
+        (if device.phone || device.tablet then
+            [ justify, paddingXY ((toFloat device.width - 1024) / 2) 20 ]
+         else
+            [ alignRight ]
+        )
         [ text "Welcome"
         , row None
             [ spacing 20 ]

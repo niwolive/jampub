@@ -18911,6 +18911,41 @@ var _mdgriffith$style_elements$Style_Font$typeface = function (families) {
 		_mdgriffith$style_elements$Style_Internal_Render_Value$typeface(families));
 };
 
+var _user$project$Jampub$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		if (_p0.ctor === 'Resize') {
+			return {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						device: _mdgriffith$style_elements$Element$classifyDevice(_p0._0)
+					}),
+				_1: _elm_lang$core$Platform_Cmd$none
+			};
+		} else {
+			return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+		}
+	});
+var _user$project$Jampub$Model = function (a) {
+	return {device: a};
+};
+var _user$project$Jampub$Idle = {ctor: 'Idle'};
+var _user$project$Jampub$Resize = function (a) {
+	return {ctor: 'Resize', _0: a};
+};
+var _user$project$Jampub$init = {
+	ctor: '_Tuple2',
+	_0: {
+		device: _mdgriffith$style_elements$Element$classifyDevice(
+			A2(_elm_lang$window$Window$Size, 0, 0))
+	},
+	_1: A2(_elm_lang$core$Task$perform, _user$project$Jampub$Resize, _elm_lang$window$Window$size)
+};
+var _user$project$Jampub$subscriptions = function (model) {
+	return _elm_lang$window$Window$resizes(_user$project$Jampub$Resize);
+};
 var _user$project$Jampub$Splash = {ctor: 'Splash'};
 var _user$project$Jampub$Post = {ctor: 'Post'};
 var _user$project$Jampub$NavBar = {ctor: 'NavBar'};
@@ -18999,111 +19034,114 @@ var _user$project$Jampub$stylesheet = _mdgriffith$style_elements$Style$styleshee
 			}
 		}
 	});
-var _user$project$Jampub$homeView = A3(
-	_mdgriffith$style_elements$Element$column,
-	_user$project$Jampub$Home,
-	{
-		ctor: '::',
-		_0: _mdgriffith$style_elements$Element_Attributes$spacing(40),
-		_1: {ctor: '[]'}
-	},
-	{
-		ctor: '::',
-		_0: A3(
-			_mdgriffith$style_elements$Element$column,
-			_user$project$Jampub$Splash,
-			{
-				ctor: '::',
-				_0: _mdgriffith$style_elements$Element_Attributes$height(
-					_mdgriffith$style_elements$Element_Attributes$px(400)),
-				_1: {
-					ctor: '::',
-					_0: _mdgriffith$style_elements$Element_Attributes$width(
-						_mdgriffith$style_elements$Element_Attributes$percent(100)),
-					_1: {
-						ctor: '::',
-						_0: _mdgriffith$style_elements$Element_Attributes$center,
-						_1: {
-							ctor: '::',
-							_0: _mdgriffith$style_elements$Element_Attributes$verticalCenter,
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			},
-			{
-				ctor: '::',
-				_0: A3(
-					_mdgriffith$style_elements$Element$el,
-					_user$project$Jampub$CatchLine,
-					{ctor: '[]'},
-					_mdgriffith$style_elements$Element$text('Lorem ipsum...')),
-				_1: {
-					ctor: '::',
-					_0: A3(
-						_mdgriffith$style_elements$Element$el,
-						_user$project$Jampub$None,
-						{ctor: '[]'},
-						_mdgriffith$style_elements$Element$text('Dolor. Sit. Amet.')),
-					_1: {ctor: '[]'}
-				}
-			}),
-		_1: {
+var _user$project$Jampub$homeView = function (viewportWidth) {
+	return A3(
+		_mdgriffith$style_elements$Element$column,
+		_user$project$Jampub$Home,
+		{
 			ctor: '::',
-			_0: _mdgriffith$style_elements$Element$article(
-				A3(
-					_mdgriffith$style_elements$Element$el,
-					_user$project$Jampub$Post,
-					{
+			_0: _mdgriffith$style_elements$Element_Attributes$spacing(40),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_mdgriffith$style_elements$Element_Attributes$paddingXY,
+					(_elm_lang$core$Basics$toFloat(viewportWidth) - 1024) / 2,
+					20),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A3(
+				_mdgriffith$style_elements$Element$column,
+				_user$project$Jampub$Splash,
+				{
+					ctor: '::',
+					_0: _mdgriffith$style_elements$Element_Attributes$height(
+						_mdgriffith$style_elements$Element_Attributes$px(400)),
+					_1: {
 						ctor: '::',
 						_0: _mdgriffith$style_elements$Element_Attributes$width(
 							_mdgriffith$style_elements$Element_Attributes$percent(100)),
-						_1: {ctor: '[]'}
-					},
-					_mdgriffith$style_elements$Element$text('First article'))),
-			_1: {ctor: '[]'}
-		}
-	});
-var _user$project$Jampub$headerView = A3(
-	_mdgriffith$style_elements$Element$row,
-	_user$project$Jampub$NavBar,
-	{
-		ctor: '::',
-		_0: _mdgriffith$style_elements$Element_Attributes$justify,
-		_1: {
-			ctor: '::',
-			_0: A2(_mdgriffith$style_elements$Element_Attributes$paddingXY, 20, 20),
-			_1: {ctor: '[]'}
-		}
-	},
-	{
-		ctor: '::',
-		_0: _mdgriffith$style_elements$Element$text('Welcome'),
-		_1: {
-			ctor: '::',
-			_0: A3(
-				_mdgriffith$style_elements$Element$row,
-				_user$project$Jampub$None,
-				{
-					ctor: '::',
-					_0: _mdgriffith$style_elements$Element_Attributes$spacing(20),
-					_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _mdgriffith$style_elements$Element_Attributes$center,
+							_1: {
+								ctor: '::',
+								_0: _mdgriffith$style_elements$Element_Attributes$verticalCenter,
+								_1: {ctor: '[]'}
+							}
+						}
+					}
 				},
 				{
 					ctor: '::',
 					_0: A3(
 						_mdgriffith$style_elements$Element$el,
-						_user$project$Jampub$None,
+						_user$project$Jampub$CatchLine,
+						{ctor: '[]'},
+						_mdgriffith$style_elements$Element$text('Lorem ipsum...')),
+					_1: {
+						ctor: '::',
+						_0: A3(
+							_mdgriffith$style_elements$Element$el,
+							_user$project$Jampub$None,
+							{ctor: '[]'},
+							_mdgriffith$style_elements$Element$text('Dolor. Sit. Amet.')),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _mdgriffith$style_elements$Element$article(
+					A3(
+						_mdgriffith$style_elements$Element$el,
+						_user$project$Jampub$Post,
 						{
 							ctor: '::',
-							_0: _mdgriffith$style_elements$Element_Attributes$alignBottom,
+							_0: _mdgriffith$style_elements$Element_Attributes$width(
+								_mdgriffith$style_elements$Element_Attributes$percent(100)),
 							_1: {ctor: '[]'}
 						},
-						A2(
-							_mdgriffith$style_elements$Element$link,
-							'http://codewithflair.org',
-							_mdgriffith$style_elements$Element$text('Blog'))),
-					_1: {
+						_mdgriffith$style_elements$Element$text('First article'))),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Jampub$headerView = function (device) {
+	return A3(
+		_mdgriffith$style_elements$Element$row,
+		_user$project$Jampub$NavBar,
+		(device.phone || device.tablet) ? {
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element_Attributes$justify,
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_mdgriffith$style_elements$Element_Attributes$paddingXY,
+					(_elm_lang$core$Basics$toFloat(device.width) - 1024) / 2,
+					20),
+				_1: {ctor: '[]'}
+			}
+		} : {
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element_Attributes$alignRight,
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element$text('Welcome'),
+			_1: {
+				ctor: '::',
+				_0: A3(
+					_mdgriffith$style_elements$Element$row,
+					_user$project$Jampub$None,
+					{
+						ctor: '::',
+						_0: _mdgriffith$style_elements$Element_Attributes$spacing(20),
+						_1: {ctor: '[]'}
+					},
+					{
 						ctor: '::',
 						_0: A3(
 							_mdgriffith$style_elements$Element$el,
@@ -19117,13 +19155,28 @@ var _user$project$Jampub$headerView = A3(
 								_mdgriffith$style_elements$Element$link,
 								'http://codewithflair.org',
 								_mdgriffith$style_elements$Element$text('Blog'))),
-						_1: {ctor: '[]'}
-					}
-				}),
-			_1: {ctor: '[]'}
-		}
-	});
-var _user$project$Jampub$view = function (_p0) {
+						_1: {
+							ctor: '::',
+							_0: A3(
+								_mdgriffith$style_elements$Element$el,
+								_user$project$Jampub$None,
+								{
+									ctor: '::',
+									_0: _mdgriffith$style_elements$Element_Attributes$alignBottom,
+									_1: {ctor: '[]'}
+								},
+								A2(
+									_mdgriffith$style_elements$Element$link,
+									'http://codewithflair.org',
+									_mdgriffith$style_elements$Element$text('Blog'))),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Jampub$view = function (model) {
 	return A2(
 		_mdgriffith$style_elements$Element$layout,
 		_user$project$Jampub$stylesheet,
@@ -19133,22 +19186,16 @@ var _user$project$Jampub$view = function (_p0) {
 			{ctor: '[]'},
 			{
 				ctor: '::',
-				_0: _user$project$Jampub$headerView,
+				_0: _user$project$Jampub$headerView(model.device),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Jampub$homeView,
+					_0: _user$project$Jampub$homeView(model.device.width),
 					_1: {ctor: '[]'}
 				}
 			}));
 };
-var _user$project$Jampub$main = _elm_lang$html$Html$beginnerProgram(
-	{
-		model: 0,
-		update: function (x) {
-			return x;
-		},
-		view: _user$project$Jampub$view
-	})();
+var _user$project$Jampub$main = _elm_lang$html$Html$program(
+	{init: _user$project$Jampub$init, update: _user$project$Jampub$update, view: _user$project$Jampub$view, subscriptions: _user$project$Jampub$subscriptions})();
 
 var Elm = {};
 Elm['Jampub'] = Elm['Jampub'] || {};
