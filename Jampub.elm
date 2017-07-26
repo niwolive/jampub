@@ -1,13 +1,9 @@
 module Jampub exposing (main)
 
-import Color
 import Element exposing (..)
 import Element.Attributes exposing (..)
 import Html exposing (Html)
-import Style exposing (..)
-import Style.Border as Border
-import Style.Color as Color
-import Style.Font as Font
+import Styles exposing (..)
 import Task exposing (..)
 import Window
 
@@ -68,68 +64,23 @@ subscriptions model =
 -- VIEW
 
 
-type Styles
-    = None
-    | CatchLine
-    | Home
-    | Main
-    | NavBar
-    | Post
-    | Splash
-
-
-stylesheet : StyleSheet Styles variation
-stylesheet =
-    Style.stylesheet
-        [ style None []
-        , style NavBar
-            [ Color.background Color.lightGrey
-            , Font.size 16
-            ]
-        , style Main
-            [ Font.typeface [ "DejaVu", "Arial" ]
-            ]
-        , style Splash
-            [ Color.background Color.lightPurple
-            ]
-        , style Post
-            [ Border.all 1
-            , Color.border Color.lightGrey
-            ]
-        , style CatchLine
-            [ Font.size 42
-            ]
-        ]
-
-
 view : Model -> Html msg
 view model =
     Element.layout stylesheet <|
         column Main
-            []
-            [ headerView model.device, homeView model.device.width ]
+            [ width (percent 100) ]
+            [ headerView model.device, homeView model.device ]
 
 
-homeView : Int -> Element Styles variation msg
-homeView viewportWidth =
-    column Home
-        [ spacing 40, paddingXY ((toFloat viewportWidth - 1024) / 2) 20 ]
-        [ column Splash
-            [ height (px 400), width (percent 100), center, verticalCenter ]
-            [ el CatchLine [] (text "Lorem ipsum...")
-            , el None [] (text "Dolor. Sit. Amet.")
-            ]
-        , article <| el Post [ width (percent 100) ] (text "First article")
-        ]
-
-
-headerView : Device -> Element Styles variation msg
+headerView : Device -> Element Classes variation msg
 headerView device =
     row NavBar
         (if device.phone || device.tablet then
-            [ justify, paddingXY ((toFloat device.width - 1024) / 2) 20 ]
+            [ alignLeft, padding 20 ]
          else
-            [ alignRight ]
+            [ justify
+            , dynamicPaddingX device.width 20
+            ]
         )
         [ text "Welcome"
         , row None
@@ -138,3 +89,45 @@ headerView device =
             , el None [ alignBottom ] (link "http://codewithflair.org" <| text "Blog")
             ]
         ]
+
+
+homeView : Device -> Element Classes variation msg
+homeView device =
+    column Home
+        [ spacingXY 0 40 -- TODO report issue here, we should be able to use spacing 40 without having the horizontal scroll
+        , dynamicPaddingX device.width 0
+        ]
+        [ empty -- This is a hack until issue #47 of the style-elements library gets solved
+        , full None
+            []
+            (column Splash
+                [ height (px 400), width (fill 1), center, verticalCenter ]
+                [ el CatchLine [] (text "Lorem ipsum...")
+                , el None [] (text "Dolor. Sit. Amet.")
+                ]
+            )
+        , article <|
+            el Post
+                [ width (fill 1), height (px 200), padding 10 ]
+                (text "First article")
+        , article <|
+            el Post
+                [ width (fill 1), height (px 200), padding 10 ]
+                (text "Second article")
+        ]
+
+
+
+-- HELPERS
+
+
+dynamicPaddingX : Int -> Int -> Attribute variation msg
+dynamicPaddingX width paddingY =
+    paddingXY
+        -- TODO instead of hard-wiring 1024 here, see if it's possible to get a value from the Device module
+        (if width > 1024 then
+            (toFloat width - 1024) / 2
+         else
+            0
+        )
+        (toFloat paddingY)
